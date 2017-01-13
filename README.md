@@ -21,7 +21,7 @@ Then
 ```bash
 cd <project name>
 npm install
-Dolphin watch
+dolphin watch
 ```
 
 Now you can develop your app...
@@ -29,7 +29,7 @@ Now you can develop your app...
 ## Options
 ```bash
 Usage: Dolphin [init [project name]| watch] [options]
-Version: 0.1.1
+Version: 0.1.3
 
 Options:
 
