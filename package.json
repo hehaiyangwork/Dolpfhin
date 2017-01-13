@@ -1,6 +1,6 @@
 {
   "name": "bluedolphin",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "A Node Command Line Tool to auto generate and build a web structure .",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
