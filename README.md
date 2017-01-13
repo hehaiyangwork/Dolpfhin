@@ -1,15 +1,20 @@
-## Dolphin
+## bluedolphin
 A Node Command Line Tool to auto generate and build a web structure .
 
 ## Install
+
 ```bash
-cd Dolphin
+// local
+cd bluedolphin
 npm link
+
+// npm
+npm install bluedolphin -g
 ```
 
 ## Usage
 ```bash
-Dolphin [init [project name] | watch] [options]
+dolphin [init [project name] | watch] [options]
 ```
 
 Then

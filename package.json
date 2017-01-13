@@ -1,6 +1,6 @@
 {
-  "name": "Dolphin",
-  "version": "0.1.1",
+  "name": "bluedolphin",
+  "version": "0.1.2",
   "description": "A Node Command Line Tool to auto generate and build a web structure .",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
   "email": "hehaiyangwork@qq.com",
   "license": "GPL",
   "bin": {
-    "dolphin": "./bin/Dolphin.js"
+    "dolphin": "./bin/BlueDolphin.js"
   },
   "homepage": "http://hehaiyang.me",
   "dependencies": {
