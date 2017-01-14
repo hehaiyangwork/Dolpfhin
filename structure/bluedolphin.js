@@ -3,18 +3,32 @@ const config = {
   vendor_dir: "/vendor/",
   vendor_files: [
     {
-      name: "a1.png",
-      url: "https://avatars2.githubusercontent.com/u/6905598?v=3&s=460",
-      child_dir: "a/",
-      version: "1.0.1"
+      name: "init.js",
+      url: "https://raw.githubusercontent.com/hehaiyangwork/my-js-lib/master/init.js"
     },
     {
-      name: "a2.png",
-      url: "https://avatars2.githubusercontent.com/u/6905598?v=3&s=40"
+      name: "helper.js",
+      url: "https://raw.githubusercontent.com/hehaiyangwork/my-js-lib/master/helper.js"
     },
     {
-      name: "a3.png",
-      url: "https://avatars2.githubusercontent.com/u/6905598?v=3&s=60"
+      name: "handlebars.js",
+      url: "https://raw.githubusercontent.com/hehaiyangwork/my-js-lib/master/handlebars.js"
+    },
+    {
+      name: "extend.js",
+      url: "https://raw.githubusercontent.com/hehaiyangwork/my-js-lib/master/extend.js"
+    },
+    {
+      name: "validator.js",
+      url: "https://raw.githubusercontent.com/hehaiyangwork/my-js-lib/master/validator/validator.js",
+      child_dir: "validator/",
+      version: "master"
+    },
+    {
+      name: "jquery.serializejson.js",
+      url: "https://raw.githubusercontent.com/hehaiyangwork/my-js-lib/master/serialize/jquery.serializejson.js",
+      child_dir: "serialize/",
+      version: "master"
     }
   ],
   redis: {

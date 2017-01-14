@@ -22,10 +22,10 @@
     "plugins" : "app/plugins/**"
   },
   "vendor": {
-    "init" : "./vendor/build/init.js",
-    "template" : "./vendor/build/template.js",
-    "js" : "./vendor/build/vendor.js",
-    "css" : "./vendor/build/vendor.css"
+    "init" : "./vendor/init.js",
+    "template" : ["./vendor/handlebars.js", "./vendor/helper.js"],
+    "js" : ["./vendor/extend.js", "./vendor/*/*.js"],
+    "css" : ["./vendor/*/*.{scss,css}"]
   },
   "file" : {
     "app" : "app.js",
