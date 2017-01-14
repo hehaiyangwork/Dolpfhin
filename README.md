@@ -29,7 +29,7 @@ Now you can develop your app...
 ## Options
 ```bash
 Usage: Dolphin [init [project name] | build | watch] [options]
-Version: 0.2.0
+Version: 0.2.1
 
 Options:
 
@@ -40,6 +40,10 @@ Options:
 
 ## Logs
 ```bash
+@0.2.1 [2017.1.14] fix not empty folder bug
 @0.2.0 [2017.1.13] download vendor files
 @0.1.* [2017.1.13] generate web structure
 ```
+
+## License
+Copyright © 2017 [MIT License](https://www.npmjs.com/package/LICENSE)

@@ -1,17 +1,17 @@
 {
   "name": "bluedolphin",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A Node Command Line Tool to auto generate and build a web structure .",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:hehaiyangwork/bluedolphin.git"
   },
   "author": "HeHaiYang",
   "email": "hehaiyangwork@qq.com",
-  "license": "GPL",
+  "license": "MIT",
   "bin": {
     "dolphin": "./bin/BlueDolphin.js"
   },
