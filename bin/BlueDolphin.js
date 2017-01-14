@@ -4,7 +4,8 @@ var program = require('commander'),
     Promise = require("bluebird"),
     gs = require('../lib/GenerateStructure'),
     download = require('../lib/DownloadFile'),
-    spawn = require('child_process').spawn;
+    spawn = require('child_process').spawn,
+    exec = require('child_process').exec;
 
 var version = require('../package.json').version;
 
@@ -28,7 +29,7 @@ if(comd == "init"){
   Promise.all([gs(pname)])
     .then(function(){
       //todo:
-
+      // git_init();
     });
 }else if(comd == "build"){
   // 2.下载依赖 3.编译打包
@@ -69,4 +70,12 @@ function download_vendor_files(pname){
     download(vendor_files[i].url, vendor_files[i].name, file_dir);
   }
 
+}
+
+function git_init(){
+  var comd = 'git init && git add . && git commit -m "first blood"';
+  var child = exec(comd, function(err, stdout, stderr) {
+      if (err) throw err;
+      else console.log("init success");
+  });
 }
