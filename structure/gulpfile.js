@@ -155,7 +155,7 @@ gulp.task('builtMainJs', function(){
     }))
     .pipe(plug.concat(config.file.main))
     .pipe(through.obj(function(file,encoding,callback){
-        var startStr = 'requirejs(["../../vendor/build/init"';
+        var startStr = 'requirejs(["../../vendor/init"';
         var endStr = '],function(init) {init.initialize();});';
         file.contents = new Buffer(startStr + file.contents + endStr);
         this.push(file);
@@ -328,7 +328,7 @@ gulp.task('successNotity', function() {
  * 开发模式
  */
 gulp.task('watch', function(cb){
-  plug.sequence('clean', 'resetVendor', "builtMainJs", ["compileJs", "compileSass", "compileTemplate"], ["components", "views", "plugins", "images"], "revmanifest", "revreplace", ["watchComponents", "watchSass", "watchJs", "watchTemplate", "watchViews"], "successNotity", cb)(function () {
+  plug.sequence('clean', "builtMainJs", ["compileJs", "compileSass", "compileTemplate"], ["components", "views", "plugins", "images"], ["watchComponents", "watchSass", "watchJs", "watchTemplate", "watchViews"], "successNotity", cb)(function () {
       log("########### 编译完成 ###########");
   });
 });
@@ -337,7 +337,7 @@ gulp.task('watch', function(cb){
  * 打包
  */
 gulp.task('build', function(cb){
-  plug.sequence('clean', 'resetVendor', "builtMainJs", ["compileJs", "compileSass", "compileTemplate"], ["components", "views", "plugins"], "revmanifest", "revreplace", "reload", "successNotity", cb)(function () {
+  plug.sequence('clean', "builtMainJs", ["compileJs", "compileSass", "compileTemplate"], ["components", "views", "plugins"], "reload", "successNotity", cb)(function () {
       log("########### 打包完成 ###########");
   });
 });

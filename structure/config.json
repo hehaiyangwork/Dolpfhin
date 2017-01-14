@@ -34,7 +34,7 @@
     "template" : "templates.js",
     "manifest" : "rev-manifest.json"
   },
-  "manifest" : ["vendor/build/vendor.js", "vendor/build/vendor.css", "public/assets/styles/*.css", "public/assets/scripts/*.js"],
+  "manifest" : ["vendor/vendor.js", "vendor/build/vendor.css", "public/assets/styles/*.css", "public/assets/scripts/*.js"],
   "revreplace" : {
     "path" : ["app/views/layout.hbs", "app/views/no_layout.hbs"]
   },
