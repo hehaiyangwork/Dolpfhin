@@ -13,11 +13,13 @@ npm install bluedolphin -g
 ```
 
 ## Usage
-```bash
-dolphin [init [project name] | build | watch] [options]
-```
 
+project init
+```bash
+dolphin init [project_name] [-G git_url] [-W folder_name]
+```
 Then
+
 ```bash
 cd <project name>
 npm install
@@ -28,18 +30,23 @@ Now you can develop your app...
 
 ## Options
 ```bash
-Usage: Dolphin [init [project name] | build | watch] [options]
-Version: 0.2.2
+Usage: dolphin init [project_name] [-G git_url] [-W folder_name]
+
+Version: 0.2.3
+
+dolphin [ build | watch ]
 
 Options:
 
   -h, --help                   output usage information
   -V, --version                output the version number
-
+  -W, --without <str | array>  generate project without some folder(value can be `plugins`)
+  -G, --git <str>              generate project with git repository
 ```
 
 ## Logs
 ```bash
+@0.2.3 [2017.1.17] add options --without & --git
 @0.2.2 [2017.1.14] add dolphin build command
 @0.2.1 [2017.1.14] fix not empty folder bug
 @0.2.0 [2017.1.13] download vendor files

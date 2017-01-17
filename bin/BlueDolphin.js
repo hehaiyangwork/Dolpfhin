@@ -13,8 +13,10 @@ var version = require('../package.json').version;
 
 program
   .version(version)
-  .usage('[init [project name] | build | watch] [options] \n  Version: '+ version)
+  .usage('init [project_name] [-G git_url] [-W folder_name] \n\n  Version: '+ version)
+  .description('dolphin [ build | watch ]')
   .option('-W, --without <str | array>', 'generate project without some folder(value can be `plugins`)')
+  .option('-G, --git <str>', 'generate project with git repository')
   .parse(process.argv);
 
 var comd = program.args[0];
@@ -85,14 +87,40 @@ function func_init(){
     })
     .then(function(){
       // 生成工程目录结构
-      return gs(project_name);
+      var _git = program.git ? program.git : false;
+      if(!_git){
+        return gs(project_name);
+      }
+      // 必须同步执行
+      if(project_name){
+        var mkdir = 'git clone ' + _git + ' ' + project_name;
+        var child = execSync(mkdir, function(err, stdout, stderr) {
+            if (err) throw err;
+        });
+      }else{
+        var mkdir = 'git clone ' + _git + ' dolphin_demo';
+        var child = execSync(mkdir, function(err, stdout, stderr) {
+            if (err) throw err;
+        });
+        return fs.copyAsync('./dolphin_demo', './')
+          .then(function(){
+              return fs.removeAsync('./dolphin_demo')
+          })
+          .catch(function(err){
+              console.log(err);
+          })
+      }
+
     })
     .then(function(){
       var outs = program.without ? program.without.split(',') : []
       return wf(project_name,outs)
     })
     .then(function(){
-      return git_init(project_name);
+      var _git = program.git ? program.git : false;
+      if(!_git){
+        return git_init(project_name);
+      }
     })
     .catch(function(err){
       console.log(err);
@@ -112,7 +140,7 @@ function func_build(){
       if(!config.vendor.dir) throw new MyError(500, 'config vendor dir undefined');
       if(!config.vendor.files) throw new MyError(500, 'config vendor files error');
       if(!(config.vendor.files instanceof Array)) throw new MyError(500, 'config vendor files must be Array');
-      // download_vendor_files(config.vendor.dir, config.vendor.files);
+      download_vendor_files(config.vendor.dir, config.vendor.files);
       return {config};
     })
     .then(function(data){
