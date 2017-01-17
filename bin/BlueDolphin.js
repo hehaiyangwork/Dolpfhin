@@ -4,6 +4,7 @@ var program = require('commander'),
     Promise = require('bluebird'),
     gs = require('../lib/GenerateStructure'),
     df = require('../lib/DownloadFile'),
+    wf = require('../lib/withoutFile'),
     exec = require('child_process').exec,
     execSync = require('child_process').execSync,
     fs = Promise.promisifyAll(require('fs-extra'));
@@ -13,6 +14,7 @@ var version = require('../package.json').version;
 program
   .version(version)
   .usage('[init [project name] | build | watch] [options] \n  Version: '+ version)
+  .option('-W, --without <str | array>', 'generate project without some folder(value can be `plugins`)')
   .parse(process.argv);
 
 var comd = program.args[0];
@@ -50,6 +52,21 @@ function MyError(code, message){
 }
 
 /**
+ * 读取配置文件
+ * @return {[type]} [description]
+ */
+function require_config(){
+  return fs.accessAsync('./bluedolphin.js', fs.F_OK)
+    .catch(function(err){
+      throw new MyError(500, 'config file [bluedolphin.js] not exist');
+    })
+    .then(function(){
+      // 加载默认配置文件
+      return require(process.cwd() + '/bluedolphin');
+    });
+}
+
+/**
  * 工程初始化
  * @return {[type]} [description]
  */
@@ -68,10 +85,14 @@ function func_init(){
     })
     .then(function(){
       // 生成工程目录结构
-      gs(project_name);
+      return gs(project_name);
     })
     .then(function(){
-      git_init(project_name);
+      var outs = program.without ? program.without.split(',') : []
+      return wf(project_name,outs)
+    })
+    .then(function(){
+      return git_init(project_name);
     })
     .catch(function(err){
       console.log(err);
@@ -84,23 +105,18 @@ function func_init(){
  */
 function func_build(){
   // 2.下载依赖 3.编译打包
-  var config;
-  return fs.accessAsync('./bluedolphin.js', fs.F_OK)
-    .catch(function(err){
-      throw new MyError(500, 'config file [bluedolphin.js] not exist');
-    })
-    .then(function(){
-      // 加载默认配置文件
-      config = require(process.cwd() + '/bluedolphin');
-    })
-    .then(function(){
+  return require_config()
+    .then(function(config){
       // 下载依赖文件
       if(!config.vendor) throw new MyError(500, 'config vendor undefined');
       if(!config.vendor.dir) throw new MyError(500, 'config vendor dir undefined');
       if(!config.vendor.files) throw new MyError(500, 'config vendor files error');
       if(!(config.vendor.files instanceof Array)) throw new MyError(500, 'config vendor files must be Array');
-
-      download_vendor_files(config.vendor.dir, config.vendor.files);
+      // download_vendor_files(config.vendor.dir, config.vendor.files);
+      return {config};
+    })
+    .then(function(data){
+        console.log(data.config.hello);
     })
     .catch(function(err){
         console.log(err);
