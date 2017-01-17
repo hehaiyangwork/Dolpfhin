@@ -1,8 +1,10 @@
 define(function(require, exports, module) {
-  var constructor;
 
-  constructor = function() {
+  function constructor() {
+    this.bindEvent();
+  }
 
+  function bindEvent() {
     $(document).on("click", "body", sayHello);
   }
 
@@ -15,8 +17,6 @@ define(function(require, exports, module) {
     console.log("Hello !");
   }
 
-  module.exports = {
-    constructor: constructor
-  };
-  
+  module.exports = constructor;
+
 });
